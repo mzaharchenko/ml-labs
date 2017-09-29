@@ -10,5 +10,5 @@
 #
 
 ### Generated images ###
-.png
+*.png
 # End of https://www.gitignore.io/api/jupyternotebook
