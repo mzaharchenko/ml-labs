@@ -8,4 +8,7 @@
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
 #
+
+### Generated images ###
+.png
 # End of https://www.gitignore.io/api/jupyternotebook
