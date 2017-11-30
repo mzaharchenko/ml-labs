@@ -12,6 +12,7 @@
 ### Generated images ###
 ### IDE-generated files ###
 *.xml
+*.iml
 ### Cache files ###
 *.pyc
 *.png
