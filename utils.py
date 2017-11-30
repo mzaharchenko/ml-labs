@@ -2,6 +2,8 @@ import numpy as np
 from numpy.linalg import LinAlgError
 from numpy.linalg import cholesky
 import matplotlib.pyplot as plt
+from scipy.special import gamma
+from sklearn.neighbors import NearestNeighbors
 
 def randncor(n, N, C):
     try:
@@ -134,6 +136,42 @@ def parzen_window(x,train,h,kernel = 'gauss_diag'):
             p_ = fit
     return p_
 
+def knn(x,XN,k):
+#x-массив векторов (точек), для которых роводится оценка плотности
+#XN-входная обучающая выборка данных
+#k - число ближайших соседей
+
+    if x.ndim ==1:
+        n1 = x.shape[0]
+        mx = 1
+    else:
+        n1,mx = x.shape
+
+    if XN.ndim ==1:
+        n2 = 1
+        N = XN.shape[0]
+    else:
+        n2,N = XN.shape
+        
+    if n1 != n2:
+        raise ValueError("Number of dimensions in x and train does not correspond:"
+                         " %d != %d" % (n1, n2))
+    if k>N:
+        raise ValueError("Number of neighbors is greater than number of training vectors"
+                        " %k > %N"%(k,N))
+    nn = NearestNeighbors(n_neighbors = k)
+    n=n1 
+    p_=np.zeros([1,mx])
+    Cn=2*(np.pi**(n/2))/(n*gamma(n/2));
+    nn.fit(XN.T)
+    if mx == 1:
+        d, ind= nn.kneighbors(x.reshape(1,-1))
+    else:
+        d, ind= nn.kneighbors(x.T)
+    r=d[:,k-1]
+    V=Cn*r**n;
+    p_=(k/N)/V.T
+    return p_
 
 
 def plot_err(h_N,errors):
