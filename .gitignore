@@ -10,5 +10,10 @@
 #
 
 ### Generated images ###
+### IDE-generated files ###
+*.xml
+*.iml
+### Cache files ###
+*.pyc
 *.png
 # End of https://www.gitignore.io/api/jupyternotebook
