@@ -16,4 +16,7 @@
 ### Cache files ###
 *.pyc
 *.png
+##Folders##
+.idea/
+__pycache__/
 # End of https://www.gitignore.io/api/jupyternotebook
